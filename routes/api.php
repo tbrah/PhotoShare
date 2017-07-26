@@ -21,6 +21,10 @@ Route::get('/users', function (Request $request){
 	return response()->json(\App\User::all());
 })->middleware('auth:api');
 
+Route::post('/users/create',[
+	'uses' => 'RegistrationController@store'
+]);
+
 Route::post('/quote', [
 	'uses' => 'QuoteController@postQuote'
 ]);
