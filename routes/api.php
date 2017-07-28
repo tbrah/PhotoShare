@@ -19,11 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/users', function (Request $request){
 	return response()->json(\App\User::all());
+	//TODO: Return only the users where 'verified' = true / 1.
 })->middleware('auth:api');
 
 Route::post('/users/create',[
 	'uses' => 'RegistrationController@store'
 ]);
+
+Route::get('/verify', [
+	'uses' => 'VerifyEmailController@verifyEmail'
+])->name('verifyEmail');
 
 Route::post('/quote', [
 	'uses' => 'QuoteController@postQuote'

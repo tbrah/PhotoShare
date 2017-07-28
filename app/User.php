@@ -10,13 +10,22 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    //Check if the user is verified or not before giving token.
+    public function findForPassport($email)
+    {
+        $user = $this->where('email', $email)->first();
+        if($user->verified == true){
+            return $user;
+        }
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'email', 'password', 'token',
     ];
 
     /**
