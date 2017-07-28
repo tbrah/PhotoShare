@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Mail;
+use App\Mail\Validation;
 use Illuminate\Support\Str;
 
 class RegistrationController extends Controller
@@ -23,10 +25,11 @@ class RegistrationController extends Controller
             'token' => Str::random(40),
     	]);
 
+        Mail::to($user->email)->send(new Validation($user));
+
         return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
 
-        // TODO: Send out an email for the token to be verified.
     }
 }
