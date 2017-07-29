@@ -13,7 +13,7 @@ class VerifyEmailController extends Controller
     	if($user->token === $token){
     		$user->verified = true;
     		$user->save();
-    		return redirect('http://localhost:4200/login/emailValid/true');
+    		return redirect('http://localhost:4200/login/emailValid/1');
     	} else {
     		return "Something went wrong. You are still not verified.";
     	}
