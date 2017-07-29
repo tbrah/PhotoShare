@@ -28,7 +28,7 @@ class RegistrationController extends Controller
         Mail::to($user->email)->send(new Validation($user));
 
         return response()->json([
-            'message' => 'Successfully created user!'
+            'message' => 'Successfully created user! We have sent you a verification email.'
         ], 201);
 
     }
