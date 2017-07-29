@@ -21,21 +21,15 @@ Route::get('/users', function (Request $request){
 	return response()->json(\App\User::all());
 })->middleware('auth:api');
 
-Route::post('/users/create',[
-	'uses' => 'RegistrationController@store'
-]);
+Route::post('/users/create',['uses' => 'RegistrationController@store']);
 
-Route::get('/verify/{id}/{token}', [
-	'uses' => 'VerifyEmailController@verify'
-]);
+Route::get('/verify/{id}/{token}', ['uses' => 'VerifyEmailController@verify']);
 
-Route::post('/quote', [
-	'uses' => 'QuoteController@postQuote'
-]);
+Route::post('/forgot-password', 'ForgotPasswordController@forgotPassword');
+Route::post('/forgot-password-check', 'ForgotPasswordController@checkUser');
 
-Route::get('/quotes', [
-	'uses' => 'QuoteController@getQuotes'
-]);
+Route::post('/quote', ['uses' => 'QuoteController@postQuote']);
+Route::get('/quotes', ['uses' => 'QuoteController@getQuotes']);
 
 /*
 Route::get('/quotes', function (Request $request) {
@@ -43,10 +37,6 @@ Route::get('/quotes', function (Request $request) {
 })->middleware('auth:api');
 */
 
-Route::put('/quote/{id}', [
-	'uses' => 'QuoteController@putQuote'
-]);
+Route::put('/quote/{id}', ['uses' => 'QuoteController@putQuote']);
 
-Route::delete('/quote/{id}', [
-	'uses' => 'QuoteController@deleteQuote'
-]);
+Route::delete('/quote/{id}', ['uses' => 'QuoteController@deleteQuote']);

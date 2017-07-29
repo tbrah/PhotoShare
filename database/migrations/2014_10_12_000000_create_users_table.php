@@ -17,9 +17,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('token')->nullable();
-            $table->boolean('verified')->default(false);
+            $table->string('token')->nullable(); // Used for verify email address.
+            $table->boolean('verified')->default(false); // Indecates if user has validated via email.
             $table->string('password');
+            $table->string('resetToken')->nullable(); // Used for reseting password.
             $table->rememberToken();
             $table->timestamps();
         });
