@@ -14,9 +14,7 @@ class ForgotPasswordController extends Controller
     {
     	$user = User::whereEmail(request('email'))->first();
     	if(count($user) == 0){
-    		return redirect()->back()->with([
-    			'success' => 'Reset code was sent to your email.'
-    			]);	
+    		return response()->json(['message' => 'Email does not exist.'], 403);
     	}
     	$user->resetToken = Str::random(40);
     	$user->save();
