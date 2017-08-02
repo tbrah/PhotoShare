@@ -66,10 +66,20 @@ class FollowsController extends Controller
     /**
      * Lists all the users the logged user is following.
      */
-    public function get($loggedUserId)
+    public function getFollows($loggedUserId)
     {
     	$follows = Follows::where('user_id', $loggedUserId)->get();
 
     	return response()->json(['follows' => $follows], 200);
+    }
+
+    /**
+     * Lists all the users that are following the logged user.
+     */
+    public function getFollowers($loggedUserId)
+    {
+    	$followers = Follows::where('id', $loggedUserId)->get();
+
+    	return response()->json(['followers' => $followers], 200);
     }
 }
