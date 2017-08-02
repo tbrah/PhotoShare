@@ -45,13 +45,35 @@ class User extends Authenticatable
         return $this->hasOne('App\UserInfo');
     }
 
+    /**
+     *  Posts user has created.
+     */
     public function posts()
     {
         return $this->hasMany('App\Post');
     }
 
+    /**
+     *  Grab all the comments a user has made.
+     */
     public function comments()
     {
         return $this->hasMany('App\Comments');
+    }
+
+    /**
+     * The users the logged user follows.
+     */
+    public function follows()
+    {
+        return $this->hasMany('App\Follows');
+    }
+
+    /**
+     *  The users that are following the logged user.
+     */
+    public function followers()
+    {
+        return $this->hasMany('App\Followers');
     }
 }

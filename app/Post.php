@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+	/**
+	 * Find all the comments to specific post.
+	 */
 	public function comments()
     {
         return $this->hasMany('App\Comments');

@@ -37,6 +37,11 @@ Route::put('/userInfo/edit', 'UserInfoController@editInfo');
 
 // Photography types
 
+//Follows
+Route::post('user/{loggedUserId}/follows/{userId}', 'FollowsController@add');
+Route::delete('user/{loggedUserId}/follows/{userId}/delete', 'FollowsController@delete');
+Route::get('user/{loggedUserId}/follows', 'FollowsController@get');
+
 // Posts
 Route::post('/post', 'PostController@postPost');
 Route::get('/posts', 'PostController@getPosts');
