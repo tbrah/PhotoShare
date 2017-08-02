@@ -36,4 +36,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * UserInfo is owned by a user.
+     */
+    public function info()
+    {
+        return $this->hasOne('App\UserInfo');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comments');
+    }
 }
