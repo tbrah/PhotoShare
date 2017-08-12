@@ -17,9 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', function (Request $request){
-	return response()->json(\App\User::all());
-})->middleware('auth:api');
+// Grabbing users.
+Route::get('/users', 'UserController@getAllUsers')->middleware('auth:api');
+Route::get('/user/{username}', 'UserController@getUser')->middleware('auth:api');
 
 // Create user.
 Route::post('/users/create',['uses' => 'RegistrationController@store']);
