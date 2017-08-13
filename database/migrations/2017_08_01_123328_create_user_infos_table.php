@@ -18,6 +18,7 @@ class CreateUserInfosTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('avatar');
             $table->boolean('first_login')->default(true);
             $table->text('about');
             $table->string('country');
