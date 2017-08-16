@@ -16,12 +16,12 @@ class CreateUserInfosTable extends Migration
         Schema::create('user_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('avatar');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('avatar')->nullable();
             $table->boolean('first_login')->default(true);
-            $table->text('about');
-            $table->string('country');
+            $table->text('about')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

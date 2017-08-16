@@ -33,6 +33,7 @@ Route::post('/forgot-password-check', 'ForgotPasswordController@checkUser');
 
 // UserInfo
 Route::post('/userInfo', 'UserInfoController@postInfo');
+Route::post('/tempStoreImg', 'UserInfoController@tempStore');
 Route::put('/userInfo/edit', 'UserInfoController@editInfo');
 
 // Photography types
