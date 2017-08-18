@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 use App\UserInfo;
 use App\User;
 
@@ -12,13 +13,19 @@ class UserInfoController extends Controller
 	/**
 	 * Post user information.
 	 */
-    public function postInfo()
+    public function postInfo(Request $request)
     {
-
         $info = json_decode(request('info'));
         $user = User::find($info->user_id);
 
             //Validate the info incomming.
+            $validator = Validator::make($request->all(),[
+                'uploadFile' => 'max:2000|mimes:jpeg,bmp,png',
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['message' => 'Failed to validate']);
+            }
 
             // Store the image in the permanent avatar folder.
             if(request()->file()){
@@ -40,16 +47,6 @@ class UserInfoController extends Controller
 
 	    	$user->info->save();
 	    	return response()->json(['message'=>'Success'], 201);
-    }
-
-    /**
-     * Temporarily store image before uplading to S3.
-     */
-    public function tempStore()
-    {
-        $file = request()->file('uploadFile')->store('tempAvatar', 's3');
-
-        return response()->json(['url' => Storage::disk('s3')->url($file)]);
     }
 
     /**

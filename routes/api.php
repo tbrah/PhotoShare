@@ -19,7 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Grabbing users.
 Route::get('/users', 'UserController@getAllUsers')->middleware('auth:api');
-Route::get('/user/{username}', 'UserController@getUser')->middleware('auth:api');
+Route::get('/user/{email}', 'UserController@getUser')->middleware('auth:api');
+Route::get('/user/username/{username}', 'UserController@getUserByUsername');
 
 // Create user.
 Route::post('/users/create',['uses' => 'RegistrationController@store']);

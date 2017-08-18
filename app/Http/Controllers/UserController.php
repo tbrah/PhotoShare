@@ -21,4 +21,13 @@ class UserController extends Controller
 
     	return response()->json($user, 201);
     }
+
+    public function getUserByUsername($username)
+    {
+        $user = User::where('username', $username)->get();
+        // Adds userInfo to the object.
+        $user[0]->info;
+
+        return response()->json($user, 201);
+    }
 }
