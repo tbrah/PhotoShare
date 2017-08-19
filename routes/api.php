@@ -50,6 +50,7 @@ Route::get('user/{loggedUserId}/followers', 'FollowsController@getFollowers');
 // Posts
 Route::post('/post', 'PostController@postPost');
 Route::get('/posts', 'PostController@getPosts');
+Route::get('/posts/{username}', 'PostController@getPostUser');
 
 // Comments
 Route::post('/post/{postId}/postComment', 'CommentsController@postComment');
