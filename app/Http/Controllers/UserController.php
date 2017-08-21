@@ -27,6 +27,7 @@ class UserController extends Controller
         $user = User::where('username', $username)->get();
         // Adds userInfo to the object.
         $user[0]->info;
+        $user[0]->posts;
 
         return response()->json($user, 201);
     }
