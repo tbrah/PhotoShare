@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comments;
+use App\Post;
 
 class CommentsController extends Controller
 {
@@ -11,15 +12,29 @@ class CommentsController extends Controller
     {
     	$this->validate(request(), [
     		'user_id' => 'required',
-			'content' => 'required',
+			'comment' => 'required',
+            'post_id' => 'required'
 		]);
 
     	$comment = new Comments();
         $comment->post_id = $postId;
     	$comment->user_id = request('user_id');
-    	$comment->content = request('content');
+    	$comment->content = request('comment');
     	$comment->save();
 
     	return response()->json(['comment' => $comment], 201);
+    }
+
+    public function getComments($postId)
+    {
+        $post = Post::find($postId);
+        $postComments = $post->comments;
+
+        foreach ($postComments as $comment) {
+            $user = $comment->user;
+            $userInfo = $user->info;
+        }
+
+        return response()->json($post);
     }
 }

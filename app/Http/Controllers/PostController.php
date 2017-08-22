@@ -48,8 +48,16 @@ class PostController extends Controller
       $user = User::where('username', $username)->get();
       
       $user[0]->info;
-      $user[0]->posts;
+      $userPosts = $user[0]->posts;
 
-      return response()->json(['posts' => $user]);
+      foreach ($userPosts as $post) {
+        $postComments = $post->comments;
+        foreach ($postComments as $comment) {
+          $userOfComment = $comment->user;
+          $userInfoOfComment = $userOfComment->info;
+        }
+      }
+
+      return response()->json([$user]);
     }
 }
