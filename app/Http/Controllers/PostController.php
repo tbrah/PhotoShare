@@ -29,7 +29,6 @@ class PostController extends Controller
         $post->user_id = $info->user_id;
         $post->picture_url = $imageLink;
         $post->description = $info->description;
-        $post->likes = 0;
         $post->save();
         return response()->json(['post' => $post], 201);
    	}
@@ -52,9 +51,16 @@ class PostController extends Controller
 
       foreach ($userPosts as $post) {
         $postComments = $post->comments;
+        $postLikes = $post->likes;
+        // Grab the user information for each comment.
         foreach ($postComments as $comment) {
           $userOfComment = $comment->user;
           $userInfoOfComment = $userOfComment->info;
+        }
+        // Grab the user information for each like.
+        foreach ($postLikes as $like){
+          $userOfLike = $like->user;
+          $userInfoOfLike = $userOfLike->info;
         }
       }
 

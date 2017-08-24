@@ -56,6 +56,9 @@ Route::get('/posts/{username}', 'PostController@getPostUser');
 Route::post('/post/{postId}/postComment', 'CommentsController@postComment');
 Route::get('/post/{postId}/getComments', 'CommentsController@getComments');
 
+// Likes
+Route::post('post/{postId}/like', 'LikesController@likePost');
+
 //
 Route::post('/quote', ['uses' => 'QuoteController@postQuote']);
 Route::get('/quotes', ['uses' => 'QuoteController@getQuotes']);
