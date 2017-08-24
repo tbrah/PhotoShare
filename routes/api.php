@@ -55,6 +55,7 @@ Route::get('/posts/{username}', 'PostController@getPostUser');
 // Comments
 Route::post('/post/{postId}/postComment', 'CommentsController@postComment');
 Route::get('/post/{postId}/getComments', 'CommentsController@getComments');
+Route::post('/post/{postId}/deleteComment/{commentId}', 'CommentsController@deleteComment');
 
 // Likes
 Route::post('post/{postId}/like', 'LikesController@likePost');

@@ -37,4 +37,18 @@ class CommentsController extends Controller
 
         return response()->json($post);
     }
+
+    public function deleteComment($postId, $commentId)
+    {
+        $userId = request('user_id');
+        $post = Post::find($postId);
+        $comment = Comments::find($commentId);
+        if($userId == $comment->user_id || $userId == $post->user_id){
+            $comment->delete();
+            return response()->json(['message' => 'Comment deleted'], 200);
+        } else {
+            return response()->json(['message' => 'There occured an error']);
+        }
+        
+    }
 }
