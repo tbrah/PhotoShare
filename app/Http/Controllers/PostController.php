@@ -36,9 +36,23 @@ class PostController extends Controller
    	public function getPosts()
    	{
         $posts = Post::all();
-        $response = [
-            'posts' => $posts
-        ];
+        foreach($posts as $post){
+          $postUser = $post->user;
+          $postUserInfo = $postUser->info;
+          $postComments = $post->comments;
+          $postLikes = $post->likes;
+          // Grab the user information for each comment.
+          foreach ($postComments as $comment) {
+            $userOfComment = $comment->user;
+            $userInfoOfComment = $userOfComment->info;
+          }
+          // Grab the user information for each like.
+          foreach ($postLikes as $like){
+            $userOfLike = $like->user;
+            $userInfoOfLike = $userOfLike->info;
+          }
+        }
+        $response = [$posts];
         return response()->json($response, 200);
    	}
 
