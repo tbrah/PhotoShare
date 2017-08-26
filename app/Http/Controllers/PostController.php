@@ -50,6 +50,8 @@ class PostController extends Controller
       $userPosts = $user[0]->posts;
 
       foreach ($userPosts as $post) {
+        $postUser = $post->user;
+        $postUser->info;
         $postComments = $post->comments;
         $postLikes = $post->likes;
         // Grab the user information for each comment.
