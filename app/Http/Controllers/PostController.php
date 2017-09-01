@@ -28,7 +28,10 @@ class PostController extends Controller
         $post = new Post();
         $post->user_id = $info->user_id;
         $post->picture_url = $imageLink;
-        $post->description = $info->description;
+        if(property_exists('info', 'description')){
+          dd($info);
+          $post->description = $info->description;
+        }
         $post->save();
         return response()->json(['post' => $post], 201);
    	}
@@ -61,6 +64,7 @@ class PostController extends Controller
       $user = User::where('username', $username)->get();
       
       $user[0]->info;
+      $user[0]->follows;
       $userPosts = $user[0]->posts;
 
       foreach ($userPosts as $post) {

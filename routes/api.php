@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Grabbing users.
-Route::get('/users', 'UserController@getAllUsers')->middleware('auth:api');
-Route::get('/user/{email}', 'UserController@getUser')->middleware('auth:api');
+Route::get('/users', 'UserController@getAllUsers');
+Route::get('/user/{email}', 'UserController@getUser');
 Route::get('/user/username/{username}', 'UserController@getUserByUsername');
 
 // Create user.

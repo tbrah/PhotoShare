@@ -10,14 +10,17 @@ class UserController extends Controller
 {
 	public function getAllUsers()
 	{
-		return response()->json(\App\User::all());
+        $users = User::all();
+        $users[0]->info;
+		return response()->json($users);
 	}
 
-    public function getUser($email)
+    public function getUser($username)
     {
-    	$user = User::where('email', $email)->get();
+    	$user = User::where('username', $username)->get();
     	// Adds userInfo to the object.
     	$user[0]->info;
+        $user[0]->follows;
 
     	return response()->json($user, 201);
     }

@@ -25,13 +25,22 @@ class FollowsController extends Controller
     	 * users can manipulate this)
     	 */
     	$user = User::find($loggedUserId);
-    	if(request('token') == $user->token){
-	    	$follows = new Follows();
-	    	$follows->id = $userId;
-	    	$follows->user_id = $loggedUserId;
-	    	$follows->save();
 
-	    	return response()->json(['follows'=> $follows], 201);
+    	if(request('token') == $user->token){
+
+            $userFollows = $user->follows()->where('id', $userId)->get();
+
+            if(empty($userFollows[0])){
+                $follows = new Follows();
+                $follows->id = $userId;
+                $follows->user_id = $loggedUserId;
+                $follows->save();
+
+                return response()->json(['follows'=> $follows], 201);
+            } else {
+                $userFollows[0]->delete();
+            }
+	    	
     	} else {
     		return response()->json(['message' => 'Something went wrong']);
     	}
