@@ -77,8 +77,13 @@ class FollowsController extends Controller
      */
     public function getFollows($loggedUserId)
     {
+        $followArray = [];
     	$follows = Follows::where('user_id', $loggedUserId)->get();
-
+        foreach ($follows as $follow) {
+            $followInfo = User::find($follow->id);
+            $followInfo['info'] = $followInfo->info;
+            $follow['followerInfo'] = $followInfo;
+        }
     	return response()->json(['follows' => $follows], 200);
     }
 
@@ -89,6 +94,6 @@ class FollowsController extends Controller
     {
     	$followers = Follows::where('id', $loggedUserId)->get();
 
-    	return response()->json(['followers' => $followers], 200);
+    	return response()->json([$followers], 200);
     }
 }

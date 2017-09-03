@@ -29,7 +29,6 @@ class PostController extends Controller
         $post->user_id = $info->user_id;
         $post->picture_url = $imageLink;
         if(property_exists('info', 'description')){
-          dd($info);
           $post->description = $info->description;
         }
         $post->save();

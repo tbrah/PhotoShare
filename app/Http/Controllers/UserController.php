@@ -15,9 +15,9 @@ class UserController extends Controller
 		return response()->json($users);
 	}
 
-    public function getUser($username)
+    public function getUser($email)
     {
-    	$user = User::where('username', $username)->get();
+    	$user = User::where('email', $email)->get();
     	// Adds userInfo to the object.
     	$user[0]->info;
         $user[0]->follows;
